@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>〇〇ITスクール - 未経験から稼げるエンジニアへ【転職成功率98%】</title> <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #4f46e5 0%, #a855f7 100%); /* グラデーション調整 */
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.4); /* 影をさらに強調 */
+        }
+        .faq-question { cursor: pointer; }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            padding: 0 1.25rem; /* p-5相当 */
+        }
+        .faq-item.open .faq-answer {
+            max-height: 500px; /* 十分な高さを確保 */
+            padding: 1.25rem; /* p-5相当 */
+            border-top: 1px solid #e5e7eb;
+        }
+        .faq-item.open .plus-icon { display: none; }
+        .faq-item:not(.open) .minus-icon { display: none; }
+        .faq-item.open .faq-question .transform { transform: rotate(180deg); } /* アイコン回転 */
+
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px); /* 少し大きく */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* カウントダウンタイマー（簡易） */
+        .countdown-timer span {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #4f46e5;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-weight: bold;
+            min-width: 2.5em; /* 幅を確保 */
+            display: inline-block;
+            text-align: center;
+        }
+
+        @media (max-width: 767px) {
+            .flow-step-mobile {
+                position: relative; padding-left: 2.5rem; margin-bottom: 2rem;
+            }
+            .flow-step-mobile::before {
+                content: attr(data-step); position: absolute; left: 0; top: 0; width: 1.75rem; height: 1.75rem; background-color: #6366f1; color: white; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: bold;
+            }
+            .flow-step-mobile:not(:last-child)::after {
+                content: ''; position: absolute; left: calc(1.75rem / 2); top: 1.75rem; bottom: -1rem; width: 2px; background-color: #a5b4fc;
+            }
+        }
+        /* ロゴスクロール */
+        .logos { overflow: hidden; padding: 20px 0; background: white; white-space: nowrap; position: relative; }
+        .logos:before, .logos:after { position: absolute; top: 0; width: 150px; height: 100%; z-index: 2; content: ""; }
+        .logos:before { left: 0; background: linear-gradient(to left, rgba(255, 255, 255, 0), white); }
+        .logos:after { right: 0; background: linear-gradient(to right, rgba(255, 255, 255, 0), white); }
+        .logos-slide { display: inline-block; animation: 35s slide infinite linear; }
+        .logos-slide img { height: 40px; margin: 0 30px; vertical-align: middle; }
+        @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold text-indigo-600 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">〇〇ITスクール</div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 focus:outline-none p-1 rounded hover:bg-gray-100">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+            <div class="hidden md:flex items-center space-x-1 lg:space-x-2"> <a href="#reason" class="text-gray-600 hover:text-indigo-600 px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium">選ばれる理由</a>
+                <a href="#courses" class="text-gray-600 hover:text-indigo-600 px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium">コース</a>
+                <a href="#outcomes" class="text-gray-600 hover:text-indigo-600 px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium">卒業後の活躍</a>
+                <a href="#instructors" class="text-gray-600 hover:text-indigo-600 px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium">講師</a>
+                <a href="#testimonials" class="text-gray-600 hover:text-indigo-600 px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium">受講生の声</a>
+                <a href="#faq" class="text-gray-600 hover:text-indigo-600 px-2 lg:px-3 py-2 rounded-md text-xs lg:text-sm font-medium">FAQ</a>
+                <a href="#contact" class="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold py-2 px-4 lg:px-5 rounded-lg transition duration-300 cta-button text-xs lg:text-sm shadow-md whitespace-nowrap">無料キャリア相談</a> </div>
+        </nav>
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
+            <a href="#reason" class="block text-gray-700 hover:bg-indigo-50 px-4 py-3 font-medium">選ばれる理由</a>
+            <a href="#courses" class="block text-gray-700 hover:bg-indigo-50 px-4 py-3 font-medium">コース</a>
+            <a href="#outcomes" class="block text-gray-700 hover:bg-indigo-50 px-4 py-3 font-medium">卒業後の活躍</a>
+            <a href="#instructors" class="block text-gray-700 hover:bg-indigo-50 px-4 py-3 font-medium">講師紹介</a>
+            <a href="#testimonials" class="block text-gray-700 hover:bg-indigo-50 px-4 py-3 font-medium">受講生の声</a>
+            <a href="#faq" class="block text-gray-700 hover:bg-indigo-50 px-4 py-3 font-medium">FAQ</a>
+            <a href="#contact" class="block bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-center font-bold mx-4 my-3 py-3 px-4 rounded-lg transition duration-300 cta-button shadow-md">無料キャリア相談はこちら</a>
+        </div>
+    </header>
+
+    <section class="hero-gradient text-white pt-24 pb-20 md:pt-36 md:pb-28 fade-in-section relative overflow-hidden">
+        <div class="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 opacity-10">
+             <svg width="600" height="600" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="100" fill="url(#paint0_radial_1_2)"/>
+                <defs><radialGradient id="paint0_radial_1_2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(100 100) rotate(90) scale(100)"><stop stop-color="white" stop-opacity="0.3"/><stop offset="1" stop-color="white" stop-opacity="0"/></radialGradient></defs>
+            </svg>
+        </div>
+         <div class="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 opacity-10">
+             <svg width="400" height="400" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="100" fill="url(#paint1_radial_1_3)"/>
+                <defs><radialGradient id="paint1_radial_1_3" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(100 100) rotate(90) scale(100)"><stop stop-color="white" stop-opacity="0.2"/><stop offset="1" stop-color="white" stop-opacity="0"/></radialGradient></defs>
+            </svg>
+        </div>
+
+        <div class="container mx-auto px-6 text-center relative z-10">
+             <span class="inline-block bg-white/20 text-white text-xs font-semibold px-3 py-1 rounded-full mb-4">卒業生1,500名突破！転職成功率98%※</span> <h1 class="text-4xl md:text-6xl font-bold mb-5 leading-tight">未経験から<span class="text-yellow-300">稼げるITエンジニア</span>へ<br>最短6ヶ月で理想のキャリアを</h1> <p class="text-lg md:text-xl mb-10 text-indigo-100 max-w-2xl mx-auto">マンツーマンサポート×実践的カリキュラムで<br class="hidden md:inline">市場価値の高いスキルを習得し、年収UPを実現</p>
+
+            <div class="bg-white/90 text-indigo-700 rounded-lg shadow-lg p-4 md:p-6 max-w-2xl mx-auto mb-10">
+                <p class="text-lg md:text-xl font-bold mb-2">【6月生募集】<span class="text-red-500">残り<span id="remaining-slots">7</span>枠！</span>今なら受講料<span class="text-red-500 text-2xl md:text-3xl font-bold">最大10万円OFF</span>！</p>
+                <p class="text-sm mb-3">キャンペーン終了まであと <span id="countdown" class="countdown-timer text-base md:text-lg"><span>03</span>日 <span>15</span>時間 <span>24</span>分 <span>10</span>秒</span></p>
+                <a href="#contact" class="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 hover:from-yellow-500 hover:via-red-600 hover:to-pink-600 text-white font-bold py-3 px-8 rounded-lg text-lg cta-button shadow-lg inline-block w-full sm:w-auto">
+                    無料相談で<span class="hidden sm:inline">割引＆</span>特典をGET <i class="fas fa-gift ml-1 text-sm"></i>
+                </a>
+            </div>
+
+            <div class="mt-6 flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm text-indigo-200">
+                <span><i class="fas fa-check-circle mr-1"></i> 未経験者歓迎</span>
+                <span><i class="fas fa-check-circle mr-1"></i> オンライン完結</span>
+                <span><i class="fas fa-check-circle mr-1"></i> 個別メンター</span>
+                <span><i class="fas fa-check-circle mr-1"></i> ポートフォリオ制作</span>
+                <span><i class="fas fa-check-circle mr-1"></i> 転職保証制度あり※</span> </div>
+             <p class="text-xs text-indigo-300 mt-4">※ 諸条件あり。詳細は無料相談にてご確認ください。</p>
+        </div>
+    </section>
+
+    <section class="py-8 bg-white fade-in-section logos">
+         <h3 class="text-center text-sm font-semibold text-gray-500 mb-4 tracking-wider uppercase">多くの卒業生が有名企業・成長企業で活躍中</h3>
+         <div class="logos-slide">
+             <img src="https://placehold.co/150x40/cccccc/ffffff?text=Company+A" alt="提携企業A">
+             <img src="https://placehold.co/150x40/cccccc/ffffff?text=企業B" alt="提携企業B">
+             <img src="https://placehold.co/150x40/cccccc/ffffff?text=Company+C" alt="提携企業C">
+             <img src="https://placehold.co/150x40/cccccc/ffffff?text=きぎょうD" alt="提携企業D">
+             <img src="https://placehold.co/150x40/cccccc/ffffff?text=Company+E" alt="提携企業E">
+             <img src="https://placehold.co/150x40/cccccc/ffffff?text=企業F" alt="提携企業F">
+             <img src="https://placehold.co/150x40/cccccc/ffffff?text=Company+G" alt="提携企業G">
+             <img src="https://placehold.co/150x40/cccccc/ffffff?text=Company+A" alt="提携企業A">
+             <img src="https://placehold.co/150x40/cccccc/ffffff?text=企業B" alt="提携企業B">
+             <img src="https://placehold.co/150x40/cccccc/ffffff?text=Company+C" alt="提携企業C">
+             <img src="https://placehold.co/150x40/cccccc/ffffff?text=きぎょうD" alt="提携企業D">
+             <img src="https://placehold.co/150x40/cccccc/ffffff?text=Company+E" alt="提携企業E">
+             <img src="https://placehold.co/150x40/cccccc/ffffff?text=企業F" alt="提携企業F">
+             <img src="https://placehold.co/150x40/cccccc/ffffff?text=Company+G" alt="提携企業G">
+        </div>
+    </section>
+
+    <section id="target" class="py-16 md:py-20 bg-gray-50 fade-in-section"> <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">こんな<span class="text-indigo-600">悩み</span>や<span class="text-indigo-600">理想</span>、<br class="sm:hidden">当てはまりませんか？</h2>
+            <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="flex items-start bg-white p-5 rounded-lg shadow border-l-4 border-red-400"> <i class="fas fa-arrow-trend-down text-red-500 text-xl mr-4 mt-1 flex-shrink-0"></i> <p class="text-gray-700">今の仕事の将来性や給料に不安がある</p> </div>
+                <div class="flex items-start bg-white p-5 rounded-lg shadow border-l-4 border-red-400"> <i class="fas fa-person-chalkboard text-red-500 text-xl mr-4 mt-1 flex-shrink-0"></i> <p class="text-gray-700">独学でプログラミングを試したが挫折した</p> </div>
+                <div class="flex items-start bg-white p-5 rounded-lg shadow border-l-4 border-red-400"> <i class="fas fa-circle-question text-red-500 text-xl mr-4 mt-1 flex-shrink-0"></i> <p class="text-gray-700">何から学べばいいか、どの言語がいいか分からない</p> </div>
+                <div class="flex items-start bg-white p-5 rounded-lg shadow border-l-4 border-green-400"> <i class="fas fa-laptop-code text-green-500 text-xl mr-4 mt-1 flex-shrink-0"></i> <p class="text-gray-700">ITエンジニアになって市場価値を高めたい</p> </div>
+                <div class="flex items-start bg-white p-5 rounded-lg shadow border-l-4 border-green-400"> <i class="fas fa-sack-dollar text-green-500 text-xl mr-4 mt-1 flex-shrink-0"></i> <p class="text-gray-700">スキルを身につけて年収を上げたい</p> </div>
+                <div class="flex items-start bg-white p-5 rounded-lg shadow border-l-4 border-green-400"> <i class="fas fa-house-laptop text-green-500 text-xl mr-4 mt-1 flex-shrink-0"></i> <p class="text-gray-700">リモートワークなど自由な働き方をしたい</p> </div>
+            </div>
+             <p class="text-center mt-12 text-xl text-gray-700 font-semibold">その悩み・理想、<br class="sm:hidden"><span class="text-indigo-600">〇〇ITスクール</span>が<span class="text-yellow-500">最短ルート</span>で実現します！</p>
+        </div>
+    </section>
+
+    <section id="reason" class="py-16 md:py-24 bg-white fade-in-section"> <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-800">未経験でも<span class="text-indigo-600">挫折しない！</span><br class="sm:hidden">選ばれる<span class="text-yellow-500">3つの理由</span></h2>
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="text-center p-6 bg-gray-50 rounded-lg shadow-lg border-t-4 border-indigo-500">
+                    <div class="mb-4 inline-block p-4 bg-indigo-100 rounded-full">
+                        <i class="fas fa-user-graduate text-4xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">理由 1: 挫折率<span class="text-red-500 text-2xl">8%</span>以下！<br>徹底した<span class="underline decoration-indigo-400 decoration-2">個別</span>サポート</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm">現役エンジニアメンターが学習計画〜転職まで伴走。週1回の面談と<span class="font-bold">24時間対応</span>のチャットで疑問を即解消。モチベーション診断で学習意欲も維持！</p>
+                </div>
+                <div class="text-center p-6 bg-gray-50 rounded-lg shadow-lg border-t-4 border-indigo-500">
+                    <div class="mb-4 inline-block p-4 bg-indigo-100 rounded-full">
+                         <i class="fas fa-code text-4xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">理由 2: <span class="underline decoration-indigo-400 decoration-2">現場で使える</span>スキル！<br>超実践的カリキュラム</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm"><span class="font-bold">大手企業監修</span>の最新カリキュラム。基礎学習に加え、模擬プロジェクト開発やコードレビューで<span class="font-bold">即戦力</span>を養成。質の高いポートフォリオが作れる！</p>
+                </div>
+                <div class="text-center p-6 bg-gray-50 rounded-lg shadow-lg border-t-4 border-indigo-500">
+                    <div class="mb-4 inline-block p-4 bg-indigo-100 rounded-full">
+                        <i class="fas fa-briefcase text-4xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-indigo-700">理由 3: 転職成功率<span class="text-red-500 text-2xl">98%</span>！<br>手厚い<span class="underline decoration-indigo-400 decoration-2">キャリア</span>支援</h3>
+                    <p class="text-gray-600 leading-relaxed text-sm">キャリア専門アドバイザーが自己分析から求人紹介(<span class="font-bold">非公開求人多数</span>)、面接対策までフルサポート。<span class="font-bold">転職保証制度</span>※もあり、安心して挑戦できる！</p>
+                </div>
+            </div>
+            <p class="text-xs text-gray-500 text-center mt-6">※ 諸条件あり。詳細は無料相談にて。</p>
+        </div>
+    </section>
+
+    <section id="flow" class="py-16 md:py-24 bg-gray-50 fade-in-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-gray-800">未経験から<span class="text-indigo-600">プロになる</span>までの<br class="sm:hidden">最短<span class="text-yellow-500">4ステップ</span></h2>
+            <div class="relative max-w-4xl mx-auto hidden md:block">
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full border-l-2 border-indigo-300 border-dashed"></div>
+                <div class="space-y-16">
+                    <div class="relative md:flex md:items-center">
+                        <div class="md:w-1/2 md:pr-8">
+                            <div class="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
+                                <span class="absolute -top-4 left-1/2 transform -translate-x-1/2 md:left-auto md:right-0 md:translate-x-1/2 bg-indigo-500 text-white text-sm font-bold px-3 py-1 rounded-full z-10">STEP 1</span>
+                                <h3 class="text-xl font-semibold mb-2 text-indigo-600"><i class="fas fa-comments mr-2"></i>無料相談＆プランニング</h3>
+                                <p class="text-gray-600 text-sm">あなたの目標や適性を診断し、最適な学習ロードマップを作成。疑問や不安も解消します。</p>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:pl-8"></div>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-indigo-500 rounded-full border-4 border-white shadow flex items-center justify-center"><i class="fas fa-check text-white text-xs"></i></div>
+                    </div>
+                    <div class="relative md:flex md:items-center">
+                        <div class="md:w-1/2 md:pr-8"></div>
+                        <div class="md:w-1/2 md:pl-8">
+                             <div class="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
+                                <span class="absolute -top-4 left-1/2 transform -translate-x-1/2 md:left-0 md:-translate-x-1/2 bg-indigo-500 text-white text-sm font-bold px-3 py-1 rounded-full z-10">STEP 2</span>
+                                <h3 class="text-xl font-semibold mb-2 text-indigo-600"><i class="fas fa-laptop-code mr-2"></i>基礎〜応用スキル習得</h3>
+                                <p class="text-gray-600 text-sm">質の高い動画教材とメンターサポートで、プログラミングの基礎から応用まで体系的に学習。</p>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-indigo-500 rounded-full border-4 border-white shadow flex items-center justify-center"><i class="fas fa-check text-white text-xs"></i></div>
+                    </div>
+                    <div class="relative md:flex md:items-center">
+                        <div class="md:w-1/2 md:pr-8">
+                             <div class="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
+                                <span class="absolute -top-4 left-1/2 transform -translate-x-1/2 md:left-auto md:right-0 md:translate-x-1/2 bg-indigo-500 text-white text-sm font-bold px-3 py-1 rounded-full z-10">STEP 3</span>
+                                <h3 class="text-xl font-semibold mb-2 text-indigo-600"><i class="fas fa-project-diagram mr-2"></i>実践力UP＆ポートフォリオ制作</h3>
+                                <p class="text-gray-600 text-sm">実務を想定した課題やチーム開発に挑戦。転職で武器になるオリジナル作品を制作します。</p>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:pl-8"></div>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-indigo-500 rounded-full border-4 border-white shadow flex items-center justify-center"><i class="fas fa-check text-white text-xs"></i></div>
+                    </div>
+                     <div class="relative md:flex md:items-center">
+                        <div class="md:w-1/2 md:pr-8"></div>
+                        <div class="md:w-1/2 md:pl-8">
+                             <div class="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
+                                <span class="absolute -top-4 left-1/2 transform -translate-x-1/2 md:left-0 md:-translate-x-1/2 bg-indigo-500 text-white text-sm font-bold px-3 py-1 rounded-full z-10">STEP 4</span>
+                                <h3 class="text-xl font-semibold mb-2 text-indigo-600"><i class="fas fa-handshake mr-2"></i>キャリアサポート＆転職成功</h3>
+                                <p class="text-gray-600 text-sm">書類添削、面接対策、求人紹介で内定獲得まで徹底サポート。理想のキャリアを実現！</p>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-indigo-500 rounded-full border-4 border-white shadow flex items-center justify-center"><i class="fas fa-check text-white text-xs"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="md:hidden max-w-md mx-auto">
+                 <div class="flow-step-mobile" data-step="1"> <div class="bg-white p-5 rounded-lg shadow-lg"> <h3 class="text-lg font-semibold mb-1 text-indigo-600"><i class="fas fa-comments mr-2"></i>無料相談＆プランニング</h3> <p class="text-sm text-gray-600">目標や適性を診断し、最適な学習ロードマップを作成。</p> </div> </div>
+                 <div class="flow-step-mobile" data-step="2"> <div class="bg-white p-5 rounded-lg shadow-lg"> <h3 class="text-lg font-semibold mb-1 text-indigo-600"><i class="fas fa-laptop-code mr-2"></i>基礎〜応用スキル習得</h3> <p class="text-sm text-gray-600">動画教材とメンターサポートで体系的に学習。</p> </div> </div>
+                 <div class="flow-step-mobile" data-step="3"> <div class="bg-white p-5 rounded-lg shadow-lg"> <h3 class="text-lg font-semibold mb-1 text-indigo-600"><i class="fas fa-project-diagram mr-2"></i>実践力UP＆ポートフォリオ制作</h3> <p class="text-sm text-gray-600">実務課題とオリジナル作品で実践力を養成。</p> </div> </div>
+                 <div class="flow-step-mobile" data-step="4"> <div class="bg-white p-5 rounded-lg shadow-lg"> <h3 class="text-lg font-semibold mb-1 text-indigo-600"><i class="fas fa-handshake mr-2"></i>キャリアサポート＆転職成功</h3> <p class="text-sm text-gray-600">書類添削から面接対策まで徹底サポート。</p> </div> </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="courses" class="py-16 md:py-24 bg-white fade-in-section"> <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">目的別<span class="text-indigo-600">人気コース</span>のご紹介</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="relative bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg shadow-xl overflow-hidden transition duration-300 hover:shadow-2xl border border-indigo-100 flex flex-col group">
+                    <span class="absolute top-0 left-0 bg-red-500 text-white text-xs font-bold px-4 py-1 rounded-br-lg z-10 shadow-md">人気No.1</span>
+                    <img src="https://placehold.co/600x400/a5b4fc/ffffff?text=Webエンジニア転職" alt="Webエンジニア転職コース" class="w-full h-48 object-cover transition duration-500 group-hover:scale-105">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-semibold mb-2 text-indigo-800">Webエンジニア転職コース</h3>
+                        <p class="text-gray-700 mb-4 text-sm flex-grow">未経験からWeb開発企業への転職を目指す決定版。フロントエンド(React)からバックエンド(Ruby on Rails)、インフラ(AWS)まで網羅。</p>
+                        <ul class="text-xs text-gray-600 space-y-1 mb-4">
+                            <li><i class="fas fa-check-circle text-green-500 mr-1"></i> 学習期間: 6ヶ月〜</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-1"></i> 受講料: <span class="line-through">¥698,000</span> <span class="text-red-500 font-bold text-base">¥598,000</span> (税込)</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-1"></i> 転職保証付き</li>
+                        </ul>
+                        <div class="mt-auto text-center">
+                            <a href="#" class="inline-block bg-indigo-600 text-white font-medium py-2 px-6 rounded-lg text-sm hover:bg-indigo-700 transition duration-300 cta-button shadow">コース詳細を見る</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transition duration-300 hover:shadow-xl border border-gray-200 flex flex-col group">
+                    <img src="https://placehold.co/600x400/818cf8/ffffff?text=データサイエンス実践" alt="データサイエンス実践コース" class="w-full h-48 object-cover transition duration-500 group-hover:scale-105">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-semibold mb-2 text-indigo-800">データサイエンス実践コース</h3>
+                        <p class="text-gray-700 mb-4 text-sm flex-grow">Pythonによるデータ分析、機械学習モデル構築、SQL、統計学を学び、データドリブンな意思決定ができる人材へ。</p>
+                         <ul class="text-xs text-gray-600 space-y-1 mb-4">
+                            <li><i class="fas fa-check-circle text-green-500 mr-1"></i> 学習期間: 4ヶ月〜</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-1"></i> 受講料: ¥498,000 (税込)</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-1"></i> 副業・スキルアップ向け</li>
+                        </ul>
+                         <div class="mt-auto text-center">
+                            <a href="#" class="inline-block bg-indigo-100 text-indigo-700 font-medium py-2 px-6 rounded-lg text-sm hover:bg-indigo-200 transition duration-300">コース詳細を見る</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transition duration-300 hover:shadow-xl border border-gray-200 flex flex-col group">
+                     <img src="https://placehold.co/600x400/c4b5fd/ffffff?text=フリーランス養成" alt="フリーランス養成コース" class="w-full h-48 object-cover transition duration-500 group-hover:scale-105">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-xl font-semibold mb-2 text-indigo-800">フリーランス養成コース</h3>
+                        <p class="text-gray-700 mb-4 text-sm flex-grow">Web制作スキル(HTML/CSS/JS/WordPress)に加え、案件獲得ノウハウ、営業、契約まで、独立に必要な全てを学ぶ。</p>
+                         <ul class="text-xs text-gray-600 space-y-1 mb-4">
+                            <li><i class="fas fa-check-circle text-green-500 mr-1"></i> 学習期間: 3ヶ月〜</li>
+                            <li><i class="fas fa-check-circle text-green-500 mr-1"></i> 受講料: ¥398,000 (税込)</li>
+                             <li><i class="fas fa-check-circle text-green-500 mr-1"></i> 案件獲得サポート付き</li>
+                        </ul>
+                         <div class="mt-auto text-center">
+                             <a href="#" class="inline-block bg-indigo-100 text-indigo-700 font-medium py-2 px-6 rounded-lg text-sm hover:bg-indigo-200 transition duration-300">コース詳細を見る</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="text-center mt-12">
+                <a href="#contact" class="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300 cta-button shadow-md">
+                    <i class="fas fa-search mr-2"></i> 自分に合うコースを相談する
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="outcomes" class="py-16 md:py-24 bg-gray-50 fade-in-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">卒業生は<span class="text-indigo-600">多方面で活躍中！</span><br class="sm:hidden">広がるキャリアパス例</h2>
+             <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center border border-gray-100">
+                    <i class="fas fa-desktop text-4xl text-indigo-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Webエンジニア</h3>
+                    <p class="text-gray-600 text-sm mb-3">Webサイトやアプリケーションの開発・運用を担当。</p>
+                    <p class="text-sm font-semibold">想定年収: <span class="text-indigo-600 text-lg">450万〜800万円</span></p>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-lg text-center border border-gray-100">
+                    <i class="fas fa-chart-line text-4xl text-indigo-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">データアナリスト</h3>
+                    <p class="text-gray-600 text-sm mb-3">データを分析し、ビジネス課題の解決策を提案。</p>
+                     <p class="text-sm font-semibold">想定年収: <span class="text-indigo-600 text-lg">500万〜900万円</span></p>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-lg text-center border border-gray-100">
+                    <i class="fas fa-briefcase text-4xl text-indigo-500 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">フリーランス</h3>
+                    <p class="text-gray-600 text-sm mb-3">Web制作や開発案件を個人で請け負い活躍。</p>
+                     <p class="text-sm font-semibold">想定年収: <span class="text-indigo-600 text-lg">スキル・実績次第</span></p>
+                </div>
+            </div>
+             <p class="text-xs text-gray-500 text-center mt-6">※ 年収はあくまで目安であり、経験やスキル、企業によって異なります。</p>
+             <div class="text-center mt-10">
+                 <a href="#contact" class="text-indigo-600 hover:text-indigo-800 font-semibold">
+                    あなたのキャリアプランも相談してみる <i class="fas fa-arrow-right ml-1 text-sm"></i>
+                 </a>
+             </div>
+        </div>
+    </section>
+
+    <section id="instructors" class="py-16 md:py-24 bg-white fade-in-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800"><span class="text-indigo-600">業界トップクラス</span>の講師陣</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">厳しい採用基準をクリアした、指導経験豊富な現役エンジニアのみが在籍。</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden text-center p-6 transition duration-300 hover:shadow-xl hover:scale-105">
+                    <img src="https://placehold.co/200x200/e0e7ff/4f46e5?text=山田太郎" alt="山田太郎の写真" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white shadow-md">
+                    <h3 class="text-xl font-semibold text-indigo-700 mb-1">山田 太郎</h3>
+                    <p class="text-sm text-indigo-500 font-medium mb-2">メガベンチャー Lead Engineer</p>
+                    <p class="text-gray-600 text-sm leading-relaxed">開発歴12年。React/Next.jsのスペシャリスト。初心者にも寄り添った丁寧な指導がモットー。</p>
+                </div>
+                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden text-center p-6 transition duration-300 hover:shadow-xl hover:scale-105">
+                    <img src="https://placehold.co/200x200/e0e7ff/4f46e5?text=佐藤花子" alt="佐藤花子の写真" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white shadow-md">
+                    <h3 class="text-xl font-semibold text-indigo-700 mb-1">佐藤 花子</h3>
+                    <p class="text-sm text-indigo-500 font-medium mb-2">外資系IT企業 Data Scientist</p>
+                    <p class="text-gray-600 text-sm leading-relaxed">Kaggle Master。Pythonを用いた機械学習モデル開発が得意。女性エンジニアのキャリア相談も歓迎。</p>
+                </div>
+                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden text-center p-6 transition duration-300 hover:shadow-xl hover:scale-105">
+                     <img src="https://placehold.co/200x200/e0e7ff/4f46e5?text=鈴木一郎" alt="鈴木一郎の写真" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white shadow-md">
+                    <h3 class="text-xl font-semibold text-indigo-700 mb-1">鈴木 一郎</h3>
+                    <p class="text-sm text-indigo-500 font-medium mb-2">フリーランス / 技術顧問</p>
+                    <p class="text-gray-600 text-sm leading-relaxed">元大手SIer出身。Ruby on Railsでのアジャイル開発経験豊富。実践的なコードレビューに定評あり。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-16 md:py-24 bg-gray-50 fade-in-section"> <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800"><span class="text-indigo-600">喜びの声</span>続々！<br class="sm:hidden">受講生のリアルな体験談</h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                 <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-100 flex flex-col sm:flex-row items-center sm:items-start">
+                    <img src="https://placehold.co/100x100/c7d2fe/4338ca?text=Aさん(32歳)" alt="受講生Aさんの写真" class="w-20 h-20 rounded-full mb-4 sm:mb-0 sm:mr-5 flex-shrink-0 border-2 border-white shadow-sm">
+                    <div class="text-center sm:text-left">
+                         <div class="text-yellow-400 mb-1">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-gray-700 mb-3 italic text-sm leading-relaxed">"文系卒・営業職から<span class="font-bold text-indigo-600">年収150万円UP</span>の転職に成功！最初は不安でしたが、メンターさんが基礎から根気強く教えてくれ、課題も実践的で力がつきました。特にポートフォリオ作成のサポートが手厚く、自信を持って面接に臨めました。"</p>
+                        <p class="font-semibold text-right text-xs">- Aさん (32歳・元営業職 → Web系自社開発企業)</p>
+                    </div>
+                </div>
+                 <div class="bg-white p-6 rounded-lg shadow-lg border border-gray-100 flex flex-col sm:flex-row items-center sm:items-start">
+                     <img src="https://placehold.co/100x100/c7d2fe/4338ca?text=Bさん(28歳)" alt="受講生Bさんの写真" class="w-20 h-20 rounded-full mb-4 sm:mb-0 sm:mr-5 flex-shrink-0 border-2 border-white shadow-sm">
+                    <div class="text-center sm:text-left">
+                         <div class="text-yellow-400 mb-1">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i> </div>
+                        <p class="text-gray-700 mb-3 italic text-sm leading-relaxed">"育児と両立しながら学習し、<span class="font-bold text-indigo-600">フリーランス</span>として独立できました！オンライン完結で自分のペースで進められたのが良かったです。チャットサポートの返信も早く、詰まることなく学習できました。案件獲得の相談にも乗ってもらえて心強かったです。"</p>
+                        <p class="font-semibold text-right text-xs">- Bさん (28歳・元事務職 → フリーランスWebデザイナー)</p>
+                    </div>
+                </div>
+            </div>
+             <div class="text-center mt-10">
+                 <a href="#contact" class="text-indigo-600 hover:text-indigo-800 font-semibold">
+                    他の卒業生の声も聞いてみる <i class="fas fa-arrow-right ml-1 text-sm"></i>
+                 </a>
+             </div>
+        </div>
+    </section>
+
+    <section id="faq" class="py-16 md:py-24 bg-white fade-in-section"> <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">疑問を解消！<span class="text-indigo-600">よくあるご質問</span></h2>
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="faq-item bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                    <div class="faq-question flex justify-between items-center p-5 hover:bg-gray-50">
+                        <h3 class="text-lg font-medium text-gray-800">Q. パソコン初心者でも大丈夫ですか？</h3>
+                        <div class="text-indigo-500 transform transition-transform duration-300"><i class="fas fa-plus plus-icon"></i><i class="fas fa-minus minus-icon"></i></div>
+                    </div>
+                    <div class="faq-answer"><p class="text-gray-600 leading-relaxed">A. はい、問題ありません。基本的なPC操作（タイピング、ファイル操作、Web検索など）ができれば大丈夫です。学習初期には環境構築のサポートもありますのでご安心ください。</p></div>
+                </div>
+                 <div class="faq-item bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                    <div class="faq-question flex justify-between items-center p-5 hover:bg-gray-50">
+                        <h3 class="text-lg font-medium text-gray-800">Q. 他のスクールとの違いは何ですか？</h3>
+                        <div class="text-indigo-500 transform transition-transform duration-300"><i class="fas fa-plus plus-icon"></i><i class="fas fa-minus minus-icon"></i></div>
+                    </div>
+                    <div class="faq-answer"><p class="text-gray-600 leading-relaxed">A. 当スクールの強みは、①現役エンジニアによる質の高いマンツーマンサポート、②現場で通用するスキルを重視した実践的カリキュラム、③転職成功まで伴走する手厚いキャリア支援、の3点です。挫折させず、確実に結果を出せる環境を提供します。</p></div>
+                </div>
+                <div class="faq-item bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                    <div class="faq-question flex justify-between items-center p-5 hover:bg-gray-50">
+                        <h3 class="text-lg font-medium text-gray-800">Q. 年齢制限はありますか？</h3>
+                         <div class="text-indigo-500 transform transition-transform duration-300"><i class="fas fa-plus plus-icon"></i><i class="fas fa-minus minus-icon"></i></div>
+                    </div>
+                    <div class="faq-answer"><p class="text-gray-600 leading-relaxed">A. 特に年齢制限は設けておりません。20代〜40代を中心に、幅広い年代の方が受講され、キャリアチェンジに成功されています。学ぶ意欲があればどなたでも歓迎いたします。</p></div>
+                </div>
+                 <div class="faq-item bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                    <div class="faq-question flex justify-between items-center p-5 hover:bg-gray-50">
+                        <h3 class="text-lg font-medium text-gray-800">Q. 受講料の分割払いは可能ですか？</h3>
+                         <div class="text-indigo-500 transform transition-transform duration-300"><i class="fas fa-plus plus-icon"></i><i class="fas fa-minus minus-icon"></i></div>
+                    </div>
+                    <div class="faq-answer"><p class="text-gray-600 leading-relaxed">A. はい、可能です。クレジットカードによる分割払いのほか、提携ローンをご利用いただくことで月々1万円台からの分割払いも可能です。詳細は無料相談にてご案内いたします。</p></div>
+                </div>
+                 <div class="faq-item bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+                    <div class="faq-question flex justify-between items-center p-5 hover:bg-gray-50">
+                        <h3 class="text-lg font-medium text-gray-800">Q. 転職保証制度について詳しく教えてください。</h3>
+                         <div class="text-indigo-500 transform transition-transform duration-300"><i class="fas fa-plus plus-icon"></i><i class="fas fa-minus minus-icon"></i></div>
+                    </div>
+                    <div class="faq-answer"><p class="text-gray-600 leading-relaxed">A. 対象コースを受講し、一定の条件（学習進捗、課題提出、転職活動への取り組みなど）を満たしたにも関わらず、受講終了後6ヶ月以内に内定を得られなかった場合、受講料を全額返金する制度です。適用条件の詳細は無料相談にてご確認ください。</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 md:py-28 bg-gradient-to-br from-indigo-700 via-purple-800 to-indigo-900 text-white fade-in-section relative"> <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%220%200%2040%2040%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20fill-opacity%3D%221%22%20d%3D%22M0%2040%20L40%200%20H20%20L0%2020%20M40%2040%20V20%20L20%2040%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E')]"></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h2 class="text-3xl md:text-5xl font-bold mb-5 leading-tight">さあ、次はあなたの番です！<br>ITエンジニアとして<span class="text-yellow-300">新しい未来</span>を切り拓こう</h2>
+            <p class="text-lg md:text-xl mb-10 text-indigo-100 max-w-xl mx-auto">まずは<span class="font-bold">無料キャリア相談</span>で、<br class="sm:hidden">あなたの可能性を確かめてみませんか？</p>
+
+             <div class="bg-white/90 text-indigo-700 rounded-lg shadow-lg p-4 md:p-6 max-w-xl mx-auto mb-10">
+                <p class="text-lg md:text-xl font-bold mb-2">【6月生】<span class="text-red-500">残り<span id="remaining-slots-footer">7</span>枠！</span>今すぐ相談で<span class="text-red-500 text-2xl md:text-3xl font-bold">10万円割引</span>適用！</p>
+                <p class="text-sm mb-3">限定キャンペーン終了まで <span id="countdown-footer" class="countdown-timer text-base md:text-lg"><span>03</span>日 <span>15</span>時間 <span>24</span>分 <span>10</span>秒</span></p>
+                 <a href="#" class="bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 hover:from-yellow-500 hover:via-red-600 hover:to-pink-600 text-white font-bold py-3 px-8 rounded-lg text-lg cta-button shadow-lg inline-block w-full sm:w-auto">
+                    <i class="fas fa-calendar-check mr-2"></i> 60秒で完了！無料相談を予約する
+                </a>
+            </div>
+
+            <p class="mt-6 text-sm text-indigo-200">オンライン相談 / 無理な勧誘一切なし / 秘密厳守</p>
+             <div class="mt-4 flex justify-center space-x-4">
+                 <a href="#" class="text-indigo-200 hover:text-white border border-indigo-300 rounded-full px-4 py-1 text-xs transition duration-300">
+                    <i class="fas fa-download mr-1"></i> 資料請求はこちら
+                 </a>
+                 <a href="#" class="text-indigo-200 hover:text-white border border-indigo-300 rounded-full px-4 py-1 text-xs transition duration-300">
+                     <i class="fas fa-phone mr-1"></i> 電話で問い合わせ
+                 </a>
+             </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-400 py-10"> <div class="container mx-auto px-6 text-center">
+            <div class="text-lg font-semibold text-white mb-4 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">〇〇ITスクール</div>
+            <div class="mb-6 space-x-4 sm:space-x-6">
+                <a href="#" class="hover:text-white text-xs sm:text-sm">会社概要</a>
+                <a href="#" class="hover:text-white text-xs sm:text-sm">プライバシーポリシー</a>
+                <a href="#" class="hover:text-white text-xs sm:text-sm">特定商取引法に基づく表記</a>
+                <a href="#faq" class="hover:text-white text-xs sm:text-sm">よくある質問</a>
+                 <a href="#" class="hover:text-white text-xs sm:text-sm">採用情報</a>
+            </div>
+            <div class="mb-6 space-x-4 text-xl">
+                <a href="#" class="hover:text-indigo-400"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-indigo-400"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-indigo-400"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-indigo-400"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="text-xs">&copy; 2024 〇〇ITスクール (運営会社: 株式会社ネクストキャリアテック). All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // モバイルメニュー
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const iconPath = mobileMenu.classList.contains('hidden') ? "M4 6h16M4 12h16m-7 6h7" : "M6 18L18 6M6 6l12 12";
+            mobileMenuButton.querySelector('svg path').setAttribute('d', iconPath);
+        });
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuButton.querySelector('svg path').setAttribute('d', "M4 6h16M4 12h16m-7 6h7");
+            });
+        });
+
+        // FAQアコーディオン
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+            question.addEventListener('click', () => {
+                const isOpen = item.classList.contains('open');
+                faqItems.forEach(otherItem => { // Close others
+                    if (otherItem !== item && otherItem.classList.contains('open')) {
+                        otherItem.classList.remove('open');
+                        otherItem.querySelector('.faq-answer').style.maxHeight = '0';
+                        otherItem.querySelector('.faq-answer').style.padding = '0 1.25rem';
+                    }
+                });
+                item.classList.toggle('open'); // Toggle current
+                if (item.classList.contains('open')) {
+                    answer.style.maxHeight = answer.scrollHeight + 40 + 'px'; // Add padding height
+                    answer.style.padding = '1.25rem';
+                } else {
+                    answer.style.maxHeight = '0';
+                    answer.style.padding = '0 1.25rem';
+                }
+            });
+        });
+
+        // スクロールアニメーション
+        const fadeInSections = document.querySelectorAll('.fade-in-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+                // Uncomment below to fade out when scrolling up
+                // else {
+                //     entry.target.classList.remove('is-visible');
+                // }
+            });
+        }, { threshold: 0.1 });
+        fadeInSections.forEach(section => observer.observe(section));
+
+        // カウントダウンタイマー (簡易版 - 実際の残り時間を設定する必要あり)
+        function startCountdown(elementId, targetDate) {
+            const countdownElement = document.getElementById(elementId);
+            if (!countdownElement) return;
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                if (distance < 0) {
+                    countdownElement.innerHTML = "キャンペーンは終了しました";
+                    clearInterval(interval);
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `<span>${String(days).padStart(2, '0')}</span>日 <span>${String(hours).padStart(2, '0')}</span>時間 <span>${String(minutes).padStart(2, '0')}</span>分 <span>${String(seconds).padStart(2, '0')}</span>秒`;
+            }
+
+            const interval = setInterval(updateCountdown, 1000);
+            updateCountdown(); // Initial call
+        }
+
+        // 例: 3日後の日付を設定
+        const deadline = new Date();
+        deadline.setDate(deadline.getDate() + 3);
+        deadline.setHours(23, 59, 59, 999); // 3日後の23:59:59に設定
+
+        startCountdown('countdown', deadline.getTime());
+        startCountdown('countdown-footer', deadline.getTime());
+
+        // 残り枠数 (簡易 - 実際にはサーバーから取得)
+        // const remainingSlotsElement = document.getElementById('remaining-slots');
+        // const remainingSlotsFooterElement = document.getElementById('remaining-slots-footer');
+        // if (remainingSlotsElement) remainingSlotsElement.textContent = '7'; // 例
+        // if (remainingSlotsFooterElement) remainingSlotsFooterElement.textContent = '7'; // 例
+
+    </script>
+
+</body>
+</html>
